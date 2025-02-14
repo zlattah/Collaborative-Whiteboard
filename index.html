@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Collaborative Whiteboard</title>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+            font-family: 'Arial', sans-serif;
+        }
+
+        h1 {
+            text-align: center;
+            font-family: 'Georgia', serif;
+            font-size: 2.5em;
+            color: #333;
+            margin: 20px 0;
+        }
+        #whiteboard {
+            display: grid;
+            background-color: white;
+            border: 2px solid #ccc;
+            cursor: crosshair;
+            margin: 0 auto;
+        }
+
+        #clearButton {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            font-size: 1em;
+            color: white;
+            background-color: #007BFF;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #clearButton:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>Collaborative Whiteboard</h1>
+    <canvas id="whiteboard" width=800 height="600"></canvas>
+    <button id="clearButton">Clear</button>
+    <script src="client.js"></script>
+</body>
+</html>
