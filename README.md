@@ -42,6 +42,6 @@ Click the Clear button to remove all drawings from the canvas.
 Connect from multiple devices to experience real-time collaboration.
 
 ## Code Structure
-index.html: The main HTML file containing the canvas and the clear button.
-client.js: Contains the client-side JavaScript logic for drawing and WebSocket communication.
-server.js: Implements the WebSocket server for managing connections and broadcasting drawing events.
+- index.html: The main HTML file containing the canvas and the clear button.
+- client.js: Contains the client-side JavaScript logic for drawing and WebSocket communication.
+- server.js: Implements the WebSocket server for managing connections and broadcasting drawing events.
