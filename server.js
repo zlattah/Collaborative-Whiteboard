@@ -22,7 +22,7 @@ server.on('connection', (socket) => {
             //deleting history
             drawingHistory.length = 0;
 
-            //updating everyone
+            //updating 
             clients.forEach((_, client) => {
                 if (client.readyState === WebSocket.OPEN) {
                     client.send(JSON.stringify(data));

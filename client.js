@@ -2,84 +2,87 @@ const canvas = document.getElementById('whiteboard');
 const ctx = canvas.getContext('2d');
 
 let drawing = false;
-let color = 'black'; // default, will change later 
-let lastX = 0;
-let lastY = 0;
+let color = 'black';
+let x_prev = 0;
+let y_prev = 0;
 
-const socket = new WebSocket('ws://localhost:8080');
+let socket;
 
-socket.onopen = function () {
-    console.log('WebSocket connection established');
-};
+function connect() {
+    socket = new WebSocket('ws://localhost:8080');
 
-socket.onerror = function (error) {
-    console.error('WebSocket Error:', error);
-};
+    socket.onopen = function () {
+        console.log('Connection Successful');
+    };
 
-socket.onmessage = function (event) {
-    const message = JSON.parse(event.data);
+    socket.onerror = function (error) {
+        console.error('WebSocket Error:', error);
+    };
 
-    //First connection established
-    if (message.type === 'init') {
-        color = message.color;
-    } else if (message.type === 'erase'){ //for eraser TBD
-        color = 'white';
-    } else if (message.type === 'clear'){ //clicked on clear button
-         ctx.clearRect(0, 0, canvas.width, canvas.height);
-    } else if (message.type === 'history') { //for loading previous history
-        message.data.forEach((data) => {
-            drawLine(data.startX, data.startY, data.endX, data.endY, data.color);
-        });
-    } else if (message.type === 'draw') {
-        drawLine(message.startX, message.startY, message.endX, message.endY, message.color);
-    }
-};
+    socket.onmessage = function (event) {
+        const message = JSON.parse(event.data);
 
-//Finding start and end positions
+        if (message.type === 'init') {
+            color = message.color;
+        } else if (message.type === 'erase') {
+            color = 'white';
+        } else if (message.type === 'clear') {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+        } else if (message.type === 'history') {
+            message.data.forEach((data) => {
+                drawfunc(data.x_start, data.y_start, data.x_end, data.y_end, data.color);
+            });
+        } else if (message.type === 'draw') {
+            drawfunc(message.x_start, message.y_start, message.x_end, message.y_end, message.color);
+        }
+    };
+
+    socket.onclose = function () {
+        console.log('Connection closed, attempting to reconnect...');
+        setTimeout(connect, 1000); // Attempt to reconnect after 1 second
+    };
+}
+
+connect();
+
 canvas.addEventListener('mousedown', (e) => {
     drawing = true;
-    const rect = canvas.getBoundingClientRect();
-    lastX = e.clientX - rect.left;
-    lastY = e.clientY - rect.top;
+    const screen = canvas.getBoundingClientRect();
+    x_prev = e.clientX - screen.left;
+    y_prev = e.clientY - screen.top;
 });
+
 canvas.addEventListener('mouseup', () => {
     drawing = false;
 });
 
-//Moving mouse
 canvas.addEventListener('mousemove', (e) => {
     if (drawing) {
-        const rect = canvas.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
+        const screen = canvas.getBoundingClientRect();
+        const x = e.clientX - screen.left;
+        const y = e.clientY - screen.top;
 
-        //drawing & sending to the server
-        drawLine(lastX, lastY, x, y, color);
-        const data = { type: 'draw', startX: lastX, startY: lastY, endX: x, endY: y, color: color };
+        drawfunc(x_prev, y_prev, x, y, color);
+        const data = { type: 'draw', x_start: x_prev, y_start: y_prev, x_end: x, y_end: y, color: color };
         socket.send(JSON.stringify(data));
 
-        //end position changed
-        lastX = x;
-        lastY = y;
+        x_prev = x;
+        y_prev = y;
     }
 });
 
-const clearButton = document.getElementById('clearButton');
+const clearButton = document.getElementById('clear');
 clearButton.addEventListener('click', () => {
-    //clear canvas & send to server
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     const data = { type: 'clear' };
     socket.send(JSON.stringify(data));
-
 });
 
-//helper function for drawing
-function drawLine(startX, startY, endX, endY, color) {
+function drawfunc(x_start, y_start, x_end, y_end, color) {
     ctx.beginPath();
-    ctx.moveTo(startX, startY);
-    ctx.lineTo(endX, endY);
+    ctx.moveTo(x_start, y_start);
+    ctx.lineTo(x_end, y_end);
     ctx.strokeStyle = color;
-    ctx.lineWidth = 5;
-    ctx.lineCap = 'round';
+    ctx.lineWidth = 3;
     ctx.stroke();
 }
