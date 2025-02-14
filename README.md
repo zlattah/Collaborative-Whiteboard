@@ -3,27 +3,15 @@
 ## Overview
 
 The **Collaborative Whiteboard** is a real-time drawing application that allows multiple users to draw on a shared canvas. You can use it for collaboration at work, study sessions, playing scribbl, etc. Enjoy!
+
+Example:
 ![Whiteboard picture](https://github.com/zlattah/Collaborative-Whiteboard/blob/master/whiteboard.png?raw=true)
-
-## Features
-
-- **Real-time Collaboration**: Multiple users can draw simultaneously, and their actions are reflected on everyone’s screen in real time.
-- **Clear Canvas**: Users can clear the canvas with a single click, removing all drawings.
-- **Persistent Drawing History**: The application maintains a history of drawings which can be restored upon connection.
-
-## Technologies Used
-
-- HTML5
-- CSS3
-- JavaScript
-- WebSocket API
-- Node.js (for WebSocket server)
 
 ## Getting Started
 
 ### Prerequisites
 
-Make sure you have Node.js installed on your machine. You can download it from [Node.js official website](https://nodejs.org/).
+Have a HTML & JavaScript environment - you can download VSCode. Install node.js - possible through the [Node.js official website](https://nodejs.org/). Install the ws library for using web sockets.
 
 ### Installation
 
