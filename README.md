@@ -2,7 +2,7 @@
 
 ## Overview
 
-The **Collaborative Whiteboard** is a real-time drawing application that allows multiple users to draw on a shared canvas. It utilizes WebSocket for real-time communication, enabling updates to be reflected instantly for all connected users, making it ideal for collaborative brainstorming sessions, online classes, or creative projects.
+The **Collaborative Whiteboard** is a real-time drawing application that allows multiple users to draw on a shared canvas. You can use it for collaboration at work, study sessions, playing scribbl, etc. Enjoy!
 
 ## Features
 
