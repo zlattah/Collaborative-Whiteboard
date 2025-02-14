@@ -16,14 +16,17 @@ Have a HTML & JavaScript environment - you can download VSCode. Install node.js 
 ### Installation
 
 1. Clone the repository:
+ Open your terminal/command prompt/powershell and run these commands:
    ```bash
    git clone https://github.com/zlattah/Collaborative-Whiteboard.git
    cd Collaborative-Whiteboard
 
-2. Start the WebSocket server:
-  node server.js
+3. Start the WebSocket server:
+   Run this command next:
+   ```bash
+   node server.js
 
-4. Open the index.html file in your web browser to access the whiteboard. You can open multiple tabs to simulate different users.
+4. Open the index.html file in your web browser to access the whiteboard. You can open multiple tabs or use different browsers (Chrome, Safari, Opera etc.) to simulate different users.
 
 ## Usage
 Draw on the canvas using your mouse.
@@ -34,3 +37,5 @@ Connect from multiple devices to experience real-time collaboration.
 - index.html: The main HTML file containing the canvas and the clear button.
 - client.js: Contains the client-side JavaScript logic for drawing and WebSocket communication.
 - server.js: Implements the WebSocket server for managing connections and broadcasting drawing events.
+
+## Logic
