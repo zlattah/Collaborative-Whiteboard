@@ -5,7 +5,8 @@
 The **Collaborative Whiteboard** is a real-time drawing application that allows multiple users to draw on a shared canvas. You can use it for collaboration at work, study sessions, playing scribbl, etc. Enjoy!
 
 Example:
-<img width="200" alt="whiteboard" src="https://github.com/user-attachments/assets/1481e7f8-85ec-4e6b-b04f-39b2d3dba743" />
+
+<img width="500" alt="whiteboard" src="https://github.com/user-attachments/assets/1481e7f8-85ec-4e6b-b04f-39b2d3dba743" />
 
 ## Getting Started
 
